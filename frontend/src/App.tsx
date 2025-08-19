@@ -8,6 +8,7 @@ function App() {
   const [todos, setTodos] = useState<Todo[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [searchQuery, setSearchQuery] = useState('');
 
   const fetchTodos = useCallback(async () => {
     try {
@@ -56,15 +57,28 @@ function App() {
     }
   };
 
+  const filteredTodos = todos.filter((todo) =>
+    todo.title.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
     <div className="app-container">
       <h1>Todo App</h1>
       <TodoForm onAdd={handleAddTodo} />
+      <div className="search-container">
+        <input
+          type="text"
+          placeholder="Search todos..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          className="search-input"
+        />
+      </div>
       {loading && <p className="loading">Loading...</p>}
       {error && <p className="error">Error: {error}</p>}
       {!loading && !error && (
         <TodoList
-          todos={todos}
+          todos={filteredTodos}
           onUpdate={handleUpdateTodo}
           onDelete={handleDeleteTodo}
         />
