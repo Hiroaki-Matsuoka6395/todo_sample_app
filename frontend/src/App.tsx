@@ -57,7 +57,7 @@ function App() {
   };
 
   return (
-    <>
+    <div className="app-container">
       <h1>Todo App</h1>
       <TodoForm onAdd={handleAddTodo} />
       {loading && <p className="loading">Loading...</p>}
@@ -69,7 +69,7 @@ function App() {
           onDelete={handleDeleteTodo}
         />
       )}
-    </>
+    </div>
   );
 }
 

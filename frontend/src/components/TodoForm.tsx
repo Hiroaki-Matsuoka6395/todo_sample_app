@@ -15,7 +15,7 @@ export function TodoForm({ onAdd }: TodoFormProps) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="todo-form">
       <input
         type="text"
         value={title}
