@@ -1,5 +1,4 @@
 import { Todo } from '../types';
-// Test
 
 interface TodoListProps {
   todos: Todo[];
@@ -9,33 +8,20 @@ interface TodoListProps {
 
 export function TodoList({ todos, onUpdate, onDelete }: TodoListProps) {
   return (
-    <table>
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Title</th>
-          <th>Done</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        {todos.map((todo) => (
-          <tr key={todo.id}>
-            <td>{todo.id}</td>
-            <td>{todo.title}</td>
-            <td>
-              <input
-                type="checkbox"
-                checked={todo.done}
-                onChange={(e) => onUpdate(todo.id, e.target.checked)}
-              />
-            </td>
-            <td>
-              <button onClick={() => onDelete(todo.id)}>Delete</button>
-            </td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
+    <ul className="todo-list">
+      {todos.map((todo) => (
+        <li key={todo.id} className={`todo-item ${todo.done ? 'done' : ''}`}>
+          <input
+            type="checkbox"
+            checked={todo.done}
+            onChange={(e) => onUpdate(todo.id, e.target.checked)}
+          />
+          <span className="todo-title">{todo.title}</span>
+          <button onClick={() => onDelete(todo.id)} className="delete-button">
+            Delete
+          </button>
+        </li>
+      ))}
+    </ul>
   );
 }
