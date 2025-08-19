@@ -1,5 +1,6 @@
 import { Todo } from '../types';
 
+// コメントを追加
 interface TodoListProps {
   todos: Todo[];
   onUpdate: (id: number, done: boolean) => void;
